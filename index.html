@@ -14,80 +14,99 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dc/2.1.8/dc.js"></script>
 
     <style>
+        /*------------------------ generic ----------------------------------*/
+
         body {
-            background:#eaff00 ;
+            background: #eaff00;
             color: white;
             display: inline-block;
             text-align: center;
             font-family: 'Poppins', sans-serif;
         }
 
+        /*------------------------ structure ----------------------------------*/
+
         div {
             clear: left;
             display: inline-block;
         }
-.dc-chart rect.bar {
-    fill:#00ff82;
-}
+
+        /*------------------------ featured elements  ----------------------------------*/
+/*---title*/
+        h1 {
+            margin-top: 5px;
+            margin-bottom: 7px;
+            color: #36003b;
+
+        }
+/*---3 combined graphs*/
+        #all-graphs {
+            background: #36003b;
+        }
+
+
+        button {
+            position: absolute;
+
+            background: #ec004f;
+            color: white;
+            padding: 8px 18px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin-left: 23.8em;
+            margin-top: 0.2em;
+            border-radius: 10px;
+        }
+
+        /*------------------------ bar chart  ----------------------------------*/
+/*---actually bar*/
+        .dc-chart rect.bar {
+            fill: #00ff82;
+        }
+
+/*---bar text*/
         .dc-chart .axis text {
-            
+
             font: 11px 'poppins', sans-serif;
         }
 
+/*---actually bar when clicked*/
         .dc-chart rect.deselected {
             stroke: none;
             fill: #e8e8e8;
 
         }
-        
-        
+/*---writing surrounding bar*/
+        svg {
+            fill: white;
 
-
-svg{
-    fill:white;
-   
-}
-
-dc-chart .axis line, .dc-chart .axis path {
-      stroke: white;
-}
-        h1 {
-            margin-top: 5px;
-            margin-bottom: 7px;
-            color: #36003b;
-            
         }
-        
-        #all-graphs{
-            background:#36003b;
+
+/*---the x and y table*/
+        dc-chart .axis line,
+        .dc-chart .axis path {
+            stroke: white;
         }
-        
-        
-        button {
-    position: absolute;
-    
-    background: #ec004f;
-    color: white;
-    padding: 8px 18px;
-     text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 20px;
-      margin-left: 23.8em;
-    margin-top: 0.2em;
-    border-radius:10px;
-}
 
-
+        /*----------------------------------------------------------*/
     </style>
 </head>
 
 <body>
+
+    <!-------------------------- reset button--------------------------------->
+
     <div>
-        <button type="submit"  onClick="refreshPage()">Reset</button>
-    
-    <h1>Premier League Top Scorers</h1>
+        <button type="submit" onClick="refreshPage()">Reset</button>
+
+        <!-------------------------- title--------------------------------->
+
+        <h1>Premier League Top Scorers</h1>
     </div>
+
+    <!-------------------------- bar charts --------------------------------->
     <div id="all-graphs">
         <div>
 
@@ -108,8 +127,10 @@ dc-chart .axis line, .dc-chart .axis path {
 
     </div>
 
-
+    <!----------------------------------------------------------->
     <script>
+        //-------------- player array-----------------------------
+
         var playersData = [
             { "name": "Aquero", "team": "Manchester City", "goals": 18, "shots": 66, "shots-on-target": 33, "assists": 6 },
             { "name": "Salah", "team": "Liverpool", "goals": 17, "shots": 70, "shots-on-target": 45, "assists": 7 },
@@ -128,30 +149,31 @@ dc-chart .axis line, .dc-chart .axis path {
             { "name": "Richarlison", "team": "Everton", "goals": 10, "shots": 37, "shots-on-target": 21, "assists": 1 },
 
         ];
+
+
         var ndx = crossfilter(playersData);
         var marginSize = { top: 10, right: 50, bottom: 30, left: 50 };
-        var barColor = "#00ff82";
         var barHeight = 200;
         var barWidth = 1200;
-
         var goal_dim = ndx.dimension(dc.pluck('name'));
         var goals_per_person = goal_dim.group().reduceSum(dc.pluck('goals'));
+var chartTotal = 
 
-
+        // --------------- goals scored bar chart ---------------
 
         dc.barChart('#goal-chart')
             .width(barWidth)
             .height(barHeight)
             .margins(marginSize)
-            .colors(barColor)
             .dimension(goal_dim)
             .group(goals_per_person)
             .transitionDuration(500)
             .x(d3.scale.ordinal())
             .xUnits(dc.units.ordinal)
             .yAxisLabel("goals")
-            .renderlet(function(chart) {
 
+            //---------------- puts total inside bar-----------------            
+            .renderlet(function(chart) {
                 var barsData = [];
                 var bars = chart.selectAll('.bar').each(function(d) {
                     barsData.push(d);
@@ -180,7 +202,7 @@ dc-chart .axis line, .dc-chart .axis path {
 
 
 
-
+        // --------------- shots bar chart ---------------
 
         var shot_dim = ndx.dimension(dc.pluck('name'));
         var shots_per_person = shot_dim.group().reduceSum(dc.pluck('shots'));
@@ -188,15 +210,14 @@ dc-chart .axis line, .dc-chart .axis path {
             .width(barWidth)
             .height(barHeight)
             .margins(marginSize)
-            .colors(barColor)
             .dimension(shot_dim)
             .group(shots_per_person)
             .transitionDuration(500)
             .x(d3.scale.ordinal())
             .xUnits(dc.units.ordinal)
             .yAxisLabel("shots")
+            //---------------- puts total inside bar-----------------       
             .renderlet(function(chart) {
-
                 var barsData = [];
                 var bars = chart.selectAll('.bar').each(function(d) {
                     barsData.push(d);
@@ -225,7 +246,7 @@ dc-chart .axis line, .dc-chart .axis path {
 
 
 
-
+        // --------------- shots on target bar chart ---------------
 
         var ontarget_dim = ndx.dimension(dc.pluck('name'));
         var ontarget_shots = ontarget_dim.group().reduceSum(dc.pluck('shots-on-target'));
@@ -236,16 +257,14 @@ dc-chart .axis line, .dc-chart .axis path {
             .width(barWidth)
             .height(barHeight)
             .margins(marginSize)
-            .colors(barColor)
             .dimension(ontarget_dim)
             .group(ontarget_shots)
             .transitionDuration(500)
             .x(d3.scale.ordinal())
             .xUnits(dc.units.ordinal)
-
             .yAxisLabel("shots on target")
+            //---------------- puts total inside bar-----------------  
             .renderlet(function(chart) {
-
                 var barsData = [];
                 var bars = chart.selectAll('.bar').each(function(d) {
                     barsData.push(d);
@@ -274,10 +293,11 @@ dc-chart .axis line, .dc-chart .axis path {
 
 
         dc.renderAll();
-        
-        function refreshPage(){
-    window.location.reload();
-} 
+
+        //---------------- reload when reset button clicked-----------------
+        function refreshPage() {
+            window.location.reload();
+        }
     </script>
 </body>
 
