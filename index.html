@@ -15,8 +15,8 @@
 
     <style>
         body {
-            background: #e5004c;
-            color: #36003b;
+            background:#eaff00 ;
+            color: white;
             display: inline-block;
             text-align: center;
             font-family: 'Poppins', sans-serif;
@@ -26,40 +26,87 @@
             clear: left;
             display: inline-block;
         }
-
+.dc-chart rect.bar {
+    fill:#00ff82;
+}
         .dc-chart .axis text {
+            
             font: 11px 'poppins', sans-serif;
         }
-        
-        h1{
-            margin-top:5px;
-            margin-bottom: 7px;
+
+        .dc-chart rect.deselected {
+            stroke: none;
+            fill: #e8e8e8;
+
         }
-      
+        
+        
+
+
+svg{
+    fill:white;
+   
+}
+
+dc-chart .axis line, .dc-chart .axis path {
+      stroke: white;
+}
+        h1 {
+            margin-top: 5px;
+            margin-bottom: 7px;
+            color: #36003b;
+            
+        }
+        
+        #all-graphs{
+            background:#36003b;
+        }
+        
+        
+        button {
+    position: absolute;
+    
+    background: #ec004f;
+    color: white;
+    padding: 8px 18px;
+     text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+      margin-left: 23.8em;
+    margin-top: 0.2em;
+    border-radius:10px;
+}
+
+
     </style>
 </head>
 
 <body>
+    <div>
+        <button type="submit"  onClick="refreshPage()">Reset</button>
+    
     <h1>Premier League Top Scorers</h1>
-
-    <div>
-
-        <div id="goal-chart"></div>
     </div>
+    <div id="all-graphs">
+        <div>
+
+            <div id="goal-chart"></div>
+        </div>
 
 
-    <div>
+        <div>
 
-        <div id="shot-chart"></div>
+            <div id="shot-chart"></div>
+        </div>
+
+
+        <div>
+
+            <div id="ontarget-chart"></div>
+        </div>
+
     </div>
-
-
-    <div>
-
-        <div id="ontarget-chart"></div>
-    </div>
-
-
 
 
     <script>
@@ -83,7 +130,7 @@
         ];
         var ndx = crossfilter(playersData);
         var marginSize = { top: 10, right: 50, bottom: 30, left: 50 };
-        var barColor = "#00f1ff";
+        var barColor = "#00ff82";
         var barHeight = 200;
         var barWidth = 1200;
 
@@ -103,34 +150,34 @@
             .x(d3.scale.ordinal())
             .xUnits(dc.units.ordinal)
             .yAxisLabel("goals")
-             .renderlet(function (chart) {
+            .renderlet(function(chart) {
 
-    var barsData = [];
-    var bars = chart.selectAll('.bar').each(function (d) {
-        barsData.push(d);
-    });
+                var barsData = [];
+                var bars = chart.selectAll('.bar').each(function(d) {
+                    barsData.push(d);
+                });
 
-    //Remove old values (if found)
-    d3.select(bars[0][0].parentNode).select('#inline-labels').remove();
-    //Create group for labels 
-    var gLabels = d3.select(bars[0][0].parentNode).append('g').attr('id', 'inline-labels');
+                //Remove old values (if found)
+                d3.select(bars[0][0].parentNode).select('#inline-labels').remove();
+                //Create group for labels 
+                var gLabels = d3.select(bars[0][0].parentNode).append('g').attr('id', 'inline-labels');
 
-    for (var i = bars[0].length - 1; i >= 0; i--) {
+                for (var i = bars[0].length - 1; i >= 0; i--) {
 
-        var b = bars[0][i];
-        //Only create label if bar height is tall enough
-        if (+b.getAttribute('height') < 18) continue;
+                    var b = bars[0][i];
+                    //Only create label if bar height is tall enough
+                    if (+b.getAttribute('height') < 18) continue;
 
-        gLabels.append("text")
-            .text(barsData[i].data.value)
-            .attr('x', +b.getAttribute('x') + (b.getAttribute('width') / 2))
-            .attr('y', +b.getAttribute('y') + 25)
-            .attr('text-anchor', 'middle')
-            .attr('fill', 'white');
-    }
+                    gLabels.append("text")
+                        .text(barsData[i].data.value)
+                        .attr('x', +b.getAttribute('x') + (b.getAttribute('width') / 2))
+                        .attr('y', +b.getAttribute('y') + 25)
+                        .attr('text-anchor', 'middle')
+                        .attr('fill', 'white');
+                }
 
-});
-            
+            });
+
 
 
 
@@ -148,33 +195,33 @@
             .x(d3.scale.ordinal())
             .xUnits(dc.units.ordinal)
             .yAxisLabel("shots")
-             .renderlet(function (chart) {
+            .renderlet(function(chart) {
 
-    var barsData = [];
-    var bars = chart.selectAll('.bar').each(function (d) {
-        barsData.push(d);
-    });
+                var barsData = [];
+                var bars = chart.selectAll('.bar').each(function(d) {
+                    barsData.push(d);
+                });
 
-    //Remove old values (if found)
-    d3.select(bars[0][0].parentNode).select('#inline-labels').remove();
-    //Create group for labels 
-    var gLabels = d3.select(bars[0][0].parentNode).append('g').attr('id', 'inline-labels');
+                //Remove old values (if found)
+                d3.select(bars[0][0].parentNode).select('#inline-labels').remove();
+                //Create group for labels 
+                var gLabels = d3.select(bars[0][0].parentNode).append('g').attr('id', 'inline-labels');
 
-    for (var i = bars[0].length - 1; i >= 0; i--) {
+                for (var i = bars[0].length - 1; i >= 0; i--) {
 
-        var b = bars[0][i];
-        //Only create label if bar height is tall enough
-        if (+b.getAttribute('height') < 18) continue;
+                    var b = bars[0][i];
+                    //Only create label if bar height is tall enough
+                    if (+b.getAttribute('height') < 18) continue;
 
-        gLabels.append("text")
-            .text(barsData[i].data.value)
-            .attr('x', +b.getAttribute('x') + (b.getAttribute('width') / 2))
-            .attr('y', +b.getAttribute('y') + 25)
-            .attr('text-anchor', 'middle')
-            .attr('fill', 'white');
-    }
+                    gLabels.append("text")
+                        .text(barsData[i].data.value)
+                        .attr('x', +b.getAttribute('x') + (b.getAttribute('width') / 2))
+                        .attr('y', +b.getAttribute('y') + 25)
+                        .attr('text-anchor', 'middle')
+                        .attr('fill', 'white');
+                }
 
-})
+            })
 
 
 
@@ -182,9 +229,9 @@
 
         var ontarget_dim = ndx.dimension(dc.pluck('name'));
         var ontarget_shots = ontarget_dim.group().reduceSum(dc.pluck('shots-on-target'));
-        
-    
-        
+
+
+
         dc.barChart('#ontarget-chart')
             .width(barWidth)
             .height(barHeight)
@@ -195,7 +242,7 @@
             .transitionDuration(500)
             .x(d3.scale.ordinal())
             .xUnits(dc.units.ordinal)
-            
+
             .yAxisLabel("shots on target")
             .renderlet(function(chart) {
 
@@ -227,7 +274,10 @@
 
 
         dc.renderAll();
-     
+        
+        function refreshPage(){
+    window.location.reload();
+} 
     </script>
 </body>
 
