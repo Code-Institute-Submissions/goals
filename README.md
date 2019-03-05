@@ -7,7 +7,7 @@ This application allows you to have a quick oversight of the 15 top goal scorers
 
 This website has been created for football fans without a specific demographic in mind because i want to appeal to all spectrums of the footballing world. I matched the font and color pallets to those used by the premier league offcial designers in order to create a fimiliarity for the user. Because the users age will differ considerable i kept everything simple and clean using chunky bars and number easy for the user to see. I wanted the user to be able to make a quick comparison between the a striker shots and how many of those equate to goals and so i built a bar chart because it a brilliant visiual add. I also wanted the user to be able to instantly and effectively compare one players performance to another and this is achieved within a couple of clicks.
 
-
+![20190305_155149](https://user-images.githubusercontent.com/40600676/53820996-cff91d80-3f64-11e9-99d2-47d6b4241a8b.jpg)
 
 ## Features
 This project involves three interactive bar charts displaying the top 15 premier league goal scorers; goals, shots and shots on target.
