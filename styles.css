@@ -1,0 +1,100 @@
+   /*------------------------ generic ----------------------------------*/
+
+   body {
+       background-color: #04f5ff;
+       color: white;
+       font-family: 'Poppins', sans-serif;
+   }
+
+
+   /*------------------------ navbar ----------------------------------*/
+
+   /*---title*/
+
+   .h1 {
+
+       color: #36003b;
+   }
+
+
+
+   /*---button*/
+
+   .btn {
+       background-color: #ec004f;
+       color: white;
+       font-size: 20px;
+
+   }
+
+   /*------------------------ context description----------------------------------*/
+
+   #context {
+       background-color: #eaff00;
+       text-align: center;
+       color: #37003c;
+   }
+
+
+
+   /*------------------------ bar chart  ----------------------------------*/
+
+   /*---3 combined graphs*/
+
+   #all-graphs {
+       background: #36003b;
+   }
+
+
+   /*---the bar*/
+
+   .dc-chart rect.bar {
+       fill: #00ff82;
+   }
+
+   /*--- bar text*/
+
+   .dc-chart .axis text {
+
+       font: 11px 'poppins', sans-serif;
+   }
+
+   /*--- the bar when clicked*/
+
+   .dc-chart rect.deselected {
+       stroke: none;
+       fill: #e8e8e8;
+
+   }
+
+   /*---writing surrounding bar*/
+
+   svg {
+       fill: white;
+   }
+
+   /*---the x and y table*/
+
+   dc-chart .axis line,
+   .dc-chart .axis path {
+       stroke: white;
+   }
+
+   text .y-axis-label .y-label {
+       padding: -50px;
+   }
+
+
+   #all-graphs {
+       overflow-x: auto;
+   }
+
+
+   /*------------------------ footer  ----------------------------------*/
+
+   #footer {
+       background-color: #04f5ff;
+       text-align: center;
+       color: #37003c;
+   }
+   

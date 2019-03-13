@@ -20,7 +20,7 @@ This project involves three interactive bar charts displaying the top 15 premier
 - Click on three players and, you get the picture, you can compare all 15 players as indepth or as specifically as you require.
 
 ### Features Left to Implement
-- In the future i would like to find and use an external source that offers an array which is freuently updated during every game to allow me a connstant accuracy.
+- I have found an external API that provides freuently updated arrays of match statistics which would afford my application constant accuracy. This API costs money and so i will await funding until i implement this.
 - I would also like to incorparate pie charts in to the mix as i believe they may be more suitable for mobiles.
 - I would also like to add more topics such as 'goal assists' and 'minutes played' to offer the user an even more in depth story.
 
@@ -36,15 +36,13 @@ This project uses:
 ## Testing
 I tested the application by constantly clicking every individual bar to see if it could handle nonstop action or to highlight any mistakes that may appear. I found that when i clicked on the 'shots-on-target' or 'shots' graphs after i had started comparing on the 'goals' chart it was impossible to navigate back to the original complete data set which could be extremely frustrating the user. Because of this i implemented a reset button which solved the problem perfectly, getting all of the data back to how it was upon loading with one simple click.
 
-I asked friends to test the site and they found it a pleasurable and interesting experience. I ran the code through a validator and found no errors.
+I asked friends to test the site and they found it a pleasurable and interesting experience. Feedback recieved was that they wasnt aware that the charts were interactive and so i added a piece of instructional text before the title. I ran the code through a validator and found no errors.
 
-There is lots of information being displayed from a vast array of players and because of this it doesnt efficiently fit on a mobile phone page. To get around this i could have made the bar chart smaller however i feel that this would have made it extremely hard to read the information and interact witn the chart alternatively I could have displayed less players however this removes important data from the user and results in a less informed application which defies the ultimate goal of it. 
-
+Originally the app wasnt very mobile friendly as the graphs contain so much information they would run off screen. I could have displayed less players to make them fit however i thought the key focus of this application was to inform the user and so information and detail is vital. With this in my after recieving some styling feedback i added a scrolling option to meet the best of both world when used on a mobile.
 
 ## Deployment
 
-I uploaded the app to github where it can be accessed and modified for later use by myself and others working on the project:
-https://github.com/eddiebrett/goals
+When i have made a change to my website i deploy the update to GitHub. This website is simple in nature and so only requires one branch called the master and everything is uploaded there. When i have made a change that i want to upload i type in the terminal: 'git init' Then i add the file i have updated for exaple: 'git add readme.md' I then add a note of what has been updated and commit the files staged in the local repository: 'git commit -m "updated readme file to be more specific and include UX drawings"' and then finally: 'git push -u origin master' This pushes the changes in the local repository to github.
 
 This app will need weekly updating by the team as and when more goals are scored by the players.
 
